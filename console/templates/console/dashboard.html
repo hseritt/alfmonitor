@@ -1,0 +1,129 @@
+{% extends 'console/base.html' %}
+{% block content %}
+	<div class="col-sm-9 dashboard_content">
+		<div class="col-sm-12">
+			<section class="alarm_list">
+				<h2 class="alarm_list_header">
+					{{ dashboard_header }}
+				</h2>
+				<table class="dashboard_list">
+				
+				{% for agent in agent_list %}
+
+					<tr>
+						<th colspan="4">
+							<h4>
+
+								{{ agent.name }} Agent
+							
+							</h4>
+						</th>
+					</tr>
+
+					{% for profile in profile_list %}
+
+						{% if profile.agent == agent %}
+		
+							<tr>
+								<th style="
+									background-color:
+										{% if profile.has_alarm %}
+											#FFA07A
+										{% else %}
+											lightgreen
+										{% endif %};
+							">
+									Name:
+								</th>
+								<td style="
+									background-color:
+										{% if profile.has_alarm %}
+											#FFA07A
+										{% else %}
+											lightgreen
+										{% endif %};
+									min-width:200px;
+								">
+									{{ profile.name }}
+								</td>
+								<th style="
+									background-color:
+										{% if profile.has_alarm %}
+											#FFA07A
+										{% else %}
+											lightgreen
+										{% endif %};
+								">
+									URL:
+								</th>
+								<td style="
+									background-color:
+										{% if profile.has_alarm %}
+											#FFA07A
+										{% else %}
+											lightgreen
+										{% endif %};
+								">
+									{{ profile.uri }}
+								</td>
+								
+							</tr>
+							<tr>
+								<th style="
+									background-color:
+										{% if profile.has_alarm %}
+											#FFA07A
+										{% else %}
+											lightgreen
+										{% endif %};
+								">
+									Port:
+								</th>
+								<td style="
+									background-color:
+										{% if profile.has_alarm %}
+											#FFA07A
+										{% else %}
+											lightgreen
+										{% endif %};
+								">
+									{{ profile.port }}
+								</td>
+								<th style="
+									background-color:
+										{% if profile.has_alarm %}
+											#FFA07A
+										{% else %}
+											lightgreen
+										{% endif %};
+								">
+									Description:
+								</th>
+								<td style="
+									background-color:
+										{% if profile.has_alarm %}
+											#FFA07A
+										{% else %}
+											lightgreen
+										{% endif %};
+								">
+									{% if profile.description %}
+										{{ profile.description }}
+									{% else %}
+										N/A
+									{% endif %}
+								</td>
+							</tr>
+							<tr><td></td></tr>
+								
+						{% endif %}
+
+					{% endfor %}
+					
+				{% endfor %}
+
+				</table>
+			</section>
+		</div>
+	</div>
+{% endblock %}

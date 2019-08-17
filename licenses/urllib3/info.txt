@@ -1,0 +1,6 @@
+Author: Andrey Petrov
+Home Page: https://urllib3.readthedocs.io/
+Keywords: urllib httplib threadsafe filepost http https ssl pooling
+License: MIT
+
+see https://pypi.python.org/pypi/urllib3/1.22

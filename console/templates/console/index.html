@@ -1,0 +1,87 @@
+{% extends 'console/base.html' %}
+{% block content %}
+
+	<div class="col-sm-9 index_content">
+		<div class="col-sm-12">
+			<section class="alarm_list">
+				<h2 class="alarm_list_header">
+					{{ active_alarms_header }}
+				</h2>
+
+				{% if alarm_list %}
+
+					{% for alarm in alarm_list %}
+						
+						<section class="alarm_box">
+							<p>
+								Profile: 
+								<a  href="/console/profile/{{ alarm.profile.id }}/">
+									{{ alarm.profile.name }}
+								</a>
+							</p>
+							<p>
+								Alarm Type: {{ alarm.alarm_type }}
+							</p>
+							<p>
+								Event Time: {{ alarm.event_time }}
+							</p>
+							<p>
+								Connect Time: {{ alarm.connect_time }}
+							</p>
+						</section>
+					
+					{% endfor %}
+				
+				{% else %}
+					
+					<section class="empty_alarm_box">
+						<p>{{ no_active_alarms_msg }}</p>
+					</section>
+
+				{% endif %}
+
+			</section>
+			<section class="alarm_list">
+				
+				<h2 class="alarm_list_header">
+					{{ last_inactive_alarms }}
+				</h2>
+
+				{% if inactive_alarm_list %}
+
+					{% for alarm in inactive_alarm_list %}
+						
+						<section class="inactive_alarm_box">
+							<p>
+								Profile:
+								<a href="/console/profile/{{ alarm.profile.id }}/">
+									{{ alarm.profile.name }}
+								</a>
+							</p>
+							<p>
+								Alarm Type: {{ alarm.alarm_type }}
+							</p>
+							<p>
+								Event Time: {{ alarm.event_time }}
+							</p>
+							<p>
+								Connect Time: {{ alarm.connect_time }}
+							</p>
+						</section>
+					
+					{% endfor %}
+				
+				{% else %}
+
+					<section class="empty_alarm_box">
+						<p>No historical alarms to report.</p>
+					</section>
+				
+				{% endif %}
+
+			</section>
+		</div>
+	</div>
+
+
+{% endblock %}

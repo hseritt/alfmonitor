@@ -1,0 +1,35 @@
+{% extends 'console/base.html' %}
+{% block content %}
+	<div class="col-sm-7 update_agent_content">
+		<div class="col-sm-12">
+			<section class="agent_data">
+				<h2 class="agent_data_header">
+					Update {{ agent.name }} Agent
+				</h2>
+				<form action="" method="POST">
+					
+					{% csrf_token %}
+					
+					<table class="update_agent">
+
+						{{ update_agent_form.as_table }}
+
+						<tr>
+							<td></td>
+							<td>
+								<span class="update_agent_buttons">
+									<input type="submit" value="Save" />
+								</span>
+								<span class="update_agent_buttons">
+									<a href="/console/agent/{{ agent.id }}/">
+										Cancel
+									</a>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</section>
+		</div>
+	</div>
+{% endblock %}

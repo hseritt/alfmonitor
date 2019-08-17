@@ -1,0 +1,158 @@
+
+div.agent_content, div.alarms_content, div.dashboard_content, 
+	div.profile_data_content, div.update_agent_content,
+	div.update_profile_content, div.profiles_content,
+	div.index_content, div.profile_data {
+	margin-left: 200px;
+	margin-bottom: 100px;
+}
+
+div.update_agent_content, div.update_profile_content, div.agent_content {
+	margin-right: 100px;
+}
+
+div.footer {
+	color: white;
+	background-color: black;
+	clear: left;
+	font-size: 12px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	box-shadow: 0px 500px 0px 500px #000;
+	max-height: 50px;
+	position: fixed;
+	clear: both;
+}
+
+div.left_menu {
+	margin-left: -300px;
+	margin-bottom: 100px;
+}
+
+div.right_menu {
+	margin-left: 100px;
+}
+
+h2.agent_data_header, h2.alarms_header, h2.alarm_list_header, h2.profile_data_header, h2.login_header {
+	margin-bottom: 15px;
+}
+
+p.profile_row {
+	font-size: 14px;
+}
+
+section.agent_data, section.alarm_list, section.profiles_data, section.alarms_data {
+	margin-bottom: 50px;
+}
+
+section.agent_list, section.profile_list {
+	margin-bottom: 30px;
+}
+
+section.alarm_box {
+	margin-bottom:20px;
+	margin-top:20px;
+	background-color:red;
+	color: white;
+	padding:20px;
+}
+
+section.divider {
+	margin-top: 50px;
+}
+
+section.inactive_alarm_box {
+	margin-bottom:20px;
+	margin-top:20px;
+	background-color:pink;
+	color: black;
+	padding:20px;
+}
+
+section.empty_alarm_box {
+	margin-bottom:20px;
+	margin-top:20px;
+}
+
+span.edit_profile, span.data_profile {
+	margin-right: 50px;
+}
+
+span.setup_profile {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+span.update_agent_buttons {
+	margin-right: 25px;
+}
+
+table.agent_list, table.profile_list {
+	table-layout: fixed;
+}
+
+table.profile_data, table.alarms, table.profiles, table.update_profile,
+table.update_agent {
+	table-layout: fixed;
+}
+
+table.agent_list th, td {
+	width:30%
+}
+
+table.profile_list th, td {
+	width:30%
+}
+
+table.profiles th, td {
+	width: 30%;
+}
+
+table.dashboard_list {
+	border-collapse: fixed;
+}
+
+table.dashboard_list h4 {
+	background-color: gray;
+	padding: 10px;
+	color: white;
+	display: inline-block;
+	width: 102.5%;
+	height: 100%;
+	font-size: 16px;
+	margin-left: -8px;
+}
+
+td.alarm_data_col {
+	width: 130px;
+}
+
+td.profile_data_col_event_time {
+	width: 125px;
+}
+
+td.alarm_data_profile_col, td.alarm_data_event_time_col {
+	width: 155px;
+}
+
+td.profile_data_col {
+	width: 165px;
+}
+
+td.profiles_name {
+	width: 300px;
+	background-color: lightgrey;
+}
+
+td.profiles {
+	width: 200px;
+	background-color: lightgrey;
+}
+
+td.has_alarm {
+	width: 200px;
+}

@@ -1,0 +1,115 @@
+{% extends 'console/base.html' %}
+{% block content %}
+	{% load auth_utils %}
+	<div class="col-sm-9 profiles_content">
+		<div class="col-sm-12">
+			<section class="profiles_data">
+				<h2 class="profiles_header">
+					Active Profiles
+				</h2>
+				<table class="profiles">
+					<tr>
+						<th>Name</th>
+						<th>Agent</th>
+						<th>URI</th>
+						{% if request.user|has_group:"console_admins" %}
+							<th>Actions</th>
+						{% endif %}
+						<th>Active Alarm?</th>
+					</tr>
+					{% if active_profile_list %}
+						
+						{% for profile in active_profile_list %}
+
+							<tr>
+								<td class="profiles_name">
+									<a href="/console/profile/{{ profile.id }}/">
+										{{ profile.name }}
+									</a>
+								</td>
+								<td class="profiles">
+									{{ profile.agent.name }}
+								</td>
+								<td class="profiles">
+									{{ profile.uri }}
+								</td>
+								{% if request.user|has_group:"console_admins" %}
+									<td class="profiles">
+										<a href="/console/profile/{{ profile.id }}/update/?next=/console/profiles/">
+											Edit
+										</a>
+									</td>
+								{% endif %}
+								<td class="has_alarm" style="
+									{% if profile.has_alarm %}
+										background-color: pink;
+									{% else %}
+										background-color: lightgreen;
+									{% endif %}"
+								>
+									{{ profile.has_alarm|yesno:"Yes,No" }}
+								</td>
+							</tr>
+
+						{% endfor %}
+					
+					{% else %}
+
+						<tr>
+							<td colspan="5">No active profiles.</td>
+						</tr>
+					
+					{% endif %}
+
+				</table>
+
+				<section class="divider"></section>
+
+				<h2 class="profiles_header">
+					Inactive Profiles
+				</h2>
+				<table class="profiles">
+					<tr>
+						<th>Name</th>
+						<th>Agent</th>
+						<th>URI</th>
+						<th>Actions</th>
+					</tr>
+					{% if inactive_profile_list %}
+						
+						{% for profile in inactive_profile_list %}
+
+							<tr>
+								<td class="profiles_name">
+									<a href="/console/profile/{{ profile.id }}/">
+										{{ profile.name }}
+									</a>
+								</td>
+								<td class="profiles">
+									{{ profile.agent.name }}
+								</td>
+								<td class="profiles">
+									{{ profile.uri }}
+								</td>
+								<td class="profiles">
+									<a href="/console/profile/{{ profile.id }}/update/?next=/console/profiles/">
+										Edit
+									</a>
+								</td>
+							</tr>
+
+						{% endfor %}
+					
+					{% else %}
+
+						<tr>
+							<td colspan="5">No inactive profiles.</td>
+						</tr>
+					
+					{% endif %}
+
+				</table>
+			</section>
+		</div>
+	</div>
+{% endblock %}

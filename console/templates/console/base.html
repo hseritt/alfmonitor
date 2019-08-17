@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+    {% if refresh_page %}
+   		<script>
+            function pageloadEvery(t) {
+                setTimeout('location.reload()', t);
+            }
+        </script>
+    {% endif %}
+    <title>Alfmonitor Console</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css" />
+    {% load static %}
+    <link rel="stylesheet" href="/static/alfmonitor/css/base.css?v={% now "jmYHi" %}">
+</head>
+{% if refresh_page %}
+    <body onload="javascript:pageloadEvery({{ agent_run_frequency }});">
+{% else %}
+    <body>
+{% endif %}
+<div class="jumbotron text-center">
+	<h1>Alfmonitor Console</h1>
+</div>
+
+<div class="container">
+
+    {% load auth_utils %}
+    <div class="row">
+    <div class="col-sm-2 left_menu">
+        <section class="agent_list">
+            <h2>{{ agents_header }}</h2>
+            
+            {% for agent in agent_list %}
+                
+                <p>
+                    <a href="{% url 'console_agent' agent_id=agent.id %}">
+                        {{ agent.name }}
+                    </a>
+                </p>
+            
+            {% endfor %}
+        </section>
+
+        <section class="active_profile_list">
+            <h2>{{ active_profiles_header }}</h2>
+            {% if request.user|has_group:"console_admins" %}
+
+                <p class="profile_row">
+                    <span class="setup_profile">
+                        <a href="/console/profile/add/">
+                            {{ setup_profile_header }}
+                        </a>
+                    </span>
+                </p>
+            
+            {% endif %}
+
+            {% if profile_list %}
+                
+                {% for profile in profile_list %}
+                    
+                    <p class="profile_row">
+                        <a href="{% url 'console_profile' profile_id=profile.id %}">
+                            {{ profile.name }}
+                        </a>
+                         | 
+                        <a href="{% url 'console_profile_data' profile_id=profile.id %}">
+                            Data
+                        </a>
+                    </p>
+                
+                {% endfor %}
+            
+            {% else %}
+                
+                <p class="profile_row">
+                    {{ no_profiles_configured_msg }}
+                </p>
+            
+            {% endif %}
+        </section>
+            
+    </div>
+    {% block content %}
+
+    {% endblock %}
+
+    <div class="col-sm-1 right_menu">
+        <h2>
+            <a href="/console/logout/">
+                LOGOUT
+            </a>
+        </h2>
+        <h2>
+            <a href="/console/">
+                HOME
+            </a>
+        </h2>
+        <h2>
+            <a href="/console/dashboard/">
+                DASHBOARD
+            </a>
+        </h2>
+        <h2>
+            <a href="/console/alarms/">
+                ALARMS
+            </a>
+        </h2>
+        <h2>
+            <a href="/console/profiles/">
+                PROFILES
+            </a>
+        </h2>
+    </div>
+    </div>
+        <div class="row">
+            <div class="col-md-12 footer">
+                <p>Alfmonitor &copy; 2018 v{{ version }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

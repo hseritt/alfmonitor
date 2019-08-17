@@ -1,0 +1,162 @@
+#!/usr/bin/env python
+""" Add profiles in devsetup.sh."""
+
+import os
+import sys
+import django
+
+from django.db.utils import IntegrityError
+sys.path.append('.')
+os.environ['DJANGO_SETTINGS_MODULE'] = 'alfmonitor.settings'
+django.setup()
+
+from agents.models import Agent, Profile
+
+
+if __name__ == '__main__':
+    profile_list = [
+        {
+            'agent': Agent.objects.get(name='Ping'),
+            'name': 'Localhost',
+            'uri': '127.0.0.1:22',
+            'performance_threshold': 4000,
+            'protocol': 'TCP',
+            'description': 'A test ping against localhost',
+        },
+        {
+            'agent': Agent.objects.get(name='Ping'),
+            'name': 'Linode Server',
+            'uri': '173.255.249.225:22',
+            'performance_threshold': 4000,
+            'protocol': 'TCP',
+            'description': 'A test ping against a remote server and ssh port.',
+        },
+        {
+            'agent': Agent.objects.get(name='Ping'),
+            'name': 'Localhost Alfresco CIFS Port 445',
+            'uri': '127.0.0.1:445',
+            'performance_threshold': 4000,
+            'protocol': 'TCP',
+            'description': 'One of a few ports tested for cifs availabilty.',
+        },
+        {
+            'agent': Agent.objects.get(name='Ping'),
+            'name': 'Localhost Alfresco CIFS Port 139',
+            'uri': '127.0.0.1:139',
+            'performance_threshold': 4000,
+            'protocol': 'TCP',
+            'description': 'One of a few ports tested for cifs availabilty.',
+        },
+        {
+            'agent': Agent.objects.get(name='Ping'),
+            'name': 'Localhost Alfresco CIFS Port 138',
+            'uri': '127.0.0.1:138',
+            'performance_threshold': 4000,
+            'protocol': 'UDP',
+            'description': 'One of a few ports tested for cifs availabilty.',
+        },
+        {
+            'agent': Agent.objects.get(name='Ping'),
+            'name': 'Localhost Alfresco CIFS Port 137',
+            'uri': '127.0.0.1:137',
+            'performance_threshold': 4000,
+            'protocol': 'UDP',
+            'description': 'One of a few ports tested for cifs availabilty.',
+        },
+        {
+            'agent': Agent.objects.get(name='Http'),
+            'name': 'Localhost Alfresco Share',
+            'uri': 'http://localhost:8080/share',
+            'performance_threshold': 4000,
+            'description': 'Ensure that Alfresco Share on localhost is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='Http'),
+            'name': 'Localhost Alfresco Web Client',
+            'uri': 'http://localhost:8080/alfresco',
+            'performance_threshold': 4000,
+            'description': 'Ensure that Alfresco Web Client on localhost is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='Http'),
+            'name': 'Prodigi Alfresco Share',
+            'uri': 'http://alfresco.veracase.com:8080/share',
+            'performance_threshold': 4000,
+            'description': 'Ensure that Alfresco Share on remote server is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='Http'),
+            'name': 'Prodigi Alfresco Web Client',
+            'uri': 'http://alfresco.veracase.com:8080/alfresco',
+            'performance_threshold': 4000,
+            'description': 'Ensure that Alfresco Web client on remote server is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='Http'),
+            'name': 'Local Alfresco Admin Dashboard',
+            'uri': 'http://localhost:8080/share/page/user/admin/dashboard',
+            'performance_threshold': 4000,
+            'description': 'Ensure that Alfresco Share Dashboard on remote server is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='CMIS Rest API'),
+            'name': 'Local Alfresco CMIS Rest API - People',
+            'uri': 'http://localhost:8080/alfresco/api/-default-/public/alfresco/versions/1/people',
+            'username': 'admin',
+            'password': 'admin',
+            'performance_threshold': 4000,
+            'description': 'Ensure that Alfresco API on localhost is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='Postgresql'),
+            'name': 'Alfmonitor Database',
+            'uri': '127.0.0.1:5432/alfmonitor',
+            'username': 'alfmonitor',
+            'password': 'alfmonitor',
+            'performance_threshold': 4000,
+            'description': 'Ensure that alfmonitor database on localhost is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='Postgresql'),
+            'name': 'Alfresco 5.2.2 Database',
+            'uri': '127.0.0.1:5432/alf5_2_2',
+            'username': 'alfresco',
+            'password': 'alfresco',
+            'performance_threshold': 4000,
+            'description': 'Ensure that Alfresco database on localhost is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='Postgresql'),
+            'name': 'Blog Database',
+            'uri': '173.255.249.225:5432/blog',
+            'username': 'blogadmin',
+            'password': 'Bl0gadm1n@2',
+            'performance_threshold': 4000,
+            'description': 'Ensure that Blog database on remote server is responsive.',
+        },
+        {
+            'agent': Agent.objects.get(name='JMXDump'),
+            'name': 'Localhost Alfresco Repository',
+            'uri': 'http://localhost:8080',
+            'username': 'admin',
+            'password': 'admin',
+            'description': 'JMX Dump settings storage',
+        },
+        {
+            'agent': Agent.objects.get(name='JMXDump'),
+            'name': 'Prodigi Alfresco Repository',
+            'uri': 'http://alfresco.veracase.com:8080',
+            'username': 'admin',
+            'password': 'Tinkgek@2!34',
+            'description': 'JMX Dump settings storage',
+        },
+    ]
+
+    for profile in profile_list:
+        p = Profile()
+        for k, v in profile.items():
+            setattr(p, k, v)
+        try:
+            p.save()
+        except IntegrityError:
+            print('Profile already exists.')

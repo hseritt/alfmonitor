@@ -1,0 +1,115 @@
+{% extends 'console/base.html' %}
+{% block content %}
+	{% load auth_utils %}
+	<div class="col-sm-7 agent_content">
+		<div class="col-sm-12">
+			<section class="agent_data">
+				<h2 class="agent_data_header">
+					
+					{{ agent.name }} Agent
+				
+				</h2>
+				<table class="agent_list">
+					<tr>
+						<th>Active ?</th>
+						<td>
+
+							{{ agent.is_active }}
+
+						</td>
+					</tr>
+					<tr>
+						<th>Script Name</th>
+						<td>
+
+							{{ agent.script }}
+
+						</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>
+
+							{{ agent.description }}
+
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							{% if request.user|has_group:"console_admins" %}
+								<a href="/console/agent/{{ agent.id }}/update/">
+									Edit
+								</a>
+							{% endif %}
+						</td>
+					</tr>
+				</table>
+			</section>
+
+			<section class="profiles_data">
+				<h2 class="profiles_header">
+					Associated Profiles for {{ agent.name }} Agent
+				</h2>
+				<table class="profiles">
+					<tr>
+						<th>Name</th>
+						<th>Active Profile?</th>
+						<th>URI</th>
+						{% if request.user|has_group:"console_admins" %}
+							<th>Actions</th>
+						{% endif %}
+						<th>Active Alarm?</th>
+					</tr>
+					{% if profile_list %}
+						
+						{% for profile in assoc_profile_list %}
+
+							<tr>
+								<td class="profiles_name">
+									<a href="/console/profile/{{ profile.id }}/">
+										{{ profile.name }}
+									</a>
+								</td>
+								<td class="profiles">
+									{{ profile.is_active|yesno:"Yes,No" }}
+								</td>
+								<td class="profiles">
+									{{ profile.uri }}
+								</td>
+								{% if request.user|has_group:"console_admins" %}
+									<td class="profiles">
+										
+										<a href="/console/profile/{{ profile.id }}/update/?next=/console/profiles/">
+											Edit
+										</a>
+										
+									</td>
+								{% endif %}
+								<td class="has_alarm" style="
+									{% if profile.has_alarm %}
+										background-color: pink;
+									{% else %}
+										background-color: lightgreen;
+									{% endif %}"
+								>
+									{{ profile.has_alarm|yesno:"Yes,No" }}
+								</td>
+							</tr>
+
+						{% endfor %}
+					
+					{% else %}
+
+						<tr>
+							<td colspan="5">No active profiles.</td>
+						</tr>
+					
+					{% endif %}
+
+				</table>
+			</section>
+		</div>
+	</div>
+
+{% endblock %}

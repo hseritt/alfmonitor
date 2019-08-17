@@ -1,0 +1,19 @@
+{% extends 'console/base_login.html' %}
+{% block content %}
+	<div class="col-sm-12 text-center pagination-centered">
+		<div class="col-sm-12 center">
+			<h2 class="login_header">
+				Alfmonitor Console Login
+			</h2>
+			<form method="POST">
+
+				{% csrf_token %}
+				{{ form.as_p }}
+				
+				<button type="submit">
+					Login
+				</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

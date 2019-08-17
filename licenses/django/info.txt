@@ -1,0 +1,3 @@
+See https://www.djangoproject.com/
+
+In addition to the license.txt in this directory, there are a few other licenses mentioned in the Django distribution that comes with the Python installation.

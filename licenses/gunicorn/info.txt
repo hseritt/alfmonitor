@@ -1,0 +1,5 @@
+Author: Benoit Chesneau
+Home Page: http://gunicorn.org
+License: MIT
+
+see https://pypi.python.org/pypi/gunicorn/19.7.1

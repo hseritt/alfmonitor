@@ -1,0 +1,35 @@
+{% extends 'console/base.html' %}
+{% block content %}
+	<div class="col-sm-7 update_profile_content">
+		<div class="col-sm-12">
+			<section class="profile_data">
+				<h2 class="profile_data_header">
+					Add New Profile
+				</h2>
+				<form action="" method="POST">
+					
+					{% csrf_token %}
+					
+					<table class="update_profile">
+
+						{{ add_profile_form.as_table }}
+
+						<tr>
+							<td></td>
+							<td>
+								<span class="update_agent_buttons">
+									<input type="submit" value="Save" />
+								</span>
+								<span class="update_agent_buttons">
+									<a href="/console/">
+										Cancel
+									</a>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</section>
+		</div>
+	</div>
+{% endblock %}

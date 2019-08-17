@@ -1,0 +1,79 @@
+{% extends 'console/base.html' %}
+{% block content %}
+	<div class="col-sm-9 profile_data_content">
+		<div class="col-sm-12">
+			<section class="profile_data">
+				<h2 class="profile_data_header">
+					{{ profile.name }} Historical Data
+				</h2>
+				<table class="profile_data">
+					
+					{% if data.object_list.count > 0 %}
+						
+						<tr>
+							<th>Availability Test Passed?</th>
+							<th>Performance Test Passed?</th>
+							<th>Connect Time ms</th>
+							<th>Event Time</th>
+						</tr>
+						
+						{% for d in data.object_list %}
+							
+							<tr>
+								<td class="profile_data_col">
+									{{ d.is_availability_test_passed }}</td>
+								<td class="profile_data_col">
+									{{ d.is_performance_test_passed }}</td>
+								<td class="profile_data_col">
+									{{ d.connect_time }}</td>
+								<td class="profile_data_col_event_time">
+									{{ d.event_time|date:"m-d-y H:i:s" }}</td>
+							</tr>
+						
+						{% endfor %}
+					
+					{% else %}
+						
+						<tr>
+							<td>No data gathered yet.</td>
+						</tr>
+					
+					{% endif %}
+
+				</table>
+			</section>
+			<div class="pagination">
+				<span class="step-links">
+					
+					{% if data.has_previous %}
+					
+						<a href="?page=1">&laquo; FIRST</a>
+						<a href="?page={{ data.previous_page_number }}">
+							| PREVIOUS
+						</a>
+					
+					{% else %}
+						
+						&laquo; FIRST | PREVIOUS
+					
+					{% endif %}
+
+					<span class="current">
+						Page {{ data.number }} of {{ data.paginator.num_pages }}.
+					</span>
+
+					{% if data.has_next %}
+						
+						<a href="?page={{ data.next_page_number }}">NEXT</a>
+						<a href="?page={{ data.paginator.num_pages }}">| LAST &raquo;</a>
+					
+					{% else %}
+						
+						NEXT | LAST &raquo;
+					
+					{% endif %}
+				</span>
+			</div>
+		</div>
+	</div>
+{% endblock %}

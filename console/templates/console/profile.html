@@ -1,0 +1,112 @@
+{% extends 'console/base.html' %}
+{% block content %}
+	{% load auth_utils %}
+	<div class="col-sm-9 profile_data">
+		<div class="col-sm-12">
+			<section class="profile_data">
+				<h2 class="profile_data_header">
+					
+					{{ profile.name }} Profile
+				
+				</h2>
+				<table class="profile_list">
+					<tr>
+						<th>Agent</th>
+						<td>{{ profile.agent.name }}</td>
+					</tr>
+
+					<tr>
+						<th>URI</th>
+						<td>{{ profile.uri }}</td>
+					</tr>
+
+					<tr>
+						<th>Port</th>
+						<td>{{ profile.port }}</td>
+					</tr>
+
+					<tr>
+						<th>Description</th>
+						<td>
+							{% if profile.description %}
+								{{ profile.description }}
+							{% else %}
+								N/A
+							{% endif %}
+						</td>
+					</tr>
+
+					<tr>
+						<th>Protocol</th>
+						<td>{{ profile.protocol }}</td>
+					</tr>
+
+					<tr>
+						<th>Username</thth>
+						<td>{{ profile.username }}</td>
+					</tr>
+
+					<tr>
+						<th>Active?</th>
+						<td>{{ profile.is_active }}</td>
+					</tr>
+
+					<tr>
+						<th>Availability Checked?</th>
+						<td>{{ profile.is_availability_checked }}</td>
+					</tr>
+
+					<tr>
+						<th>Performance Checked?</th>
+						<td>{{ profile.is_performance_checked }}</td>
+					</tr>
+
+					<tr>
+						<th>Performance Threshold in ms</th>
+						<td>{{ profile.performance_threshold }}</td>
+					</tr>
+
+					<tr>
+						<th>Alarm Created for Availability Failures?</th>
+						<td>{{ profile.is_alarm_created_for_availability }}</td>
+					</tr>
+
+					<tr>
+						<th>Alarm Created for Performance Failures?</th>
+						<td>{{ profile.is_alarm_created_for_performance }}</td>
+					</tr>
+
+					<tr>
+						<th>Data Stored for Availability?</th>
+						<td>{{ profile.is_data_stored_for_availability }}</td>
+					</tr>
+
+					<tr>
+						<th>Data Stored for Performance?</th>
+						<td>{{ profile.is_data_stored_for_performance }}</td>
+					</tr>
+
+					<tr>
+						<td>
+							{% if request.user|has_group:"console_admins" %}
+
+								<span class="edit_profile">
+									<a href="{% url 'console_update_profile' profile_id=profile.id %}">
+										Edit
+									</a>
+								</span>
+							
+							{% endif %}
+
+							<span class="data_profile">
+								<a href="{% url 'console_profile_data' profile_id=profile.id %}">
+									Data
+								</a>
+							</span>
+						</td>
+					</tr>
+				</table>
+			</section>
+		</div>
+	</div>
+{% endblock %}

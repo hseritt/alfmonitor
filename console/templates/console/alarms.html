@@ -1,0 +1,87 @@
+{% extends 'console/base.html' %}
+{% block content %}
+	<div class="col-sm-9 alarms_content">
+		<div class="col-sm-12">
+			<section class="alarms_data">
+				<h2 class="alarms_header">
+					Historical Alarms
+				</h2>
+				<table class="alarms">
+					<tr>
+						<th>Profile</th>
+						<th>Agent</th>
+						<th>Type</th>
+						<th>Connect Time</th>
+						<th>Event Time</th>
+					</tr>
+					{% if alarms.object_list %}
+						
+						{% for alarm in alarms.object_list %}
+
+							<tr>
+								<td class="alarm_data_profile_col" >
+									<a href="/console/profile/{{ alarm.profile.id }}/">
+										{{ alarm.profile.name }}
+									</a>
+								</td>
+								<td class="alarm_data_col" >
+									{{ alarm.profile.agent.name }}
+								</td>
+								<td class="alarm_data_col" >
+									{{ alarm.alarm_type }}
+								</td>
+								<td class="alarm_data_col" >
+									{{ alarm.connect_time }}
+								</td>
+								<td class="alarm_data_event_time_col" >
+									{{ alarm.event_time|date:"m-d-y H:i:s" }}
+								</td>
+							</tr>
+
+						{% endfor %}
+					
+					{% else %}
+
+						<tr>
+							<td colspan="5">No alarms created so far.</td>
+						</tr>
+					
+					{% endif %}
+
+				</table>
+			</section>
+			<div class="pagination">
+				<span class="step-links">
+					
+					{% if alarms.has_previous %}
+					
+						<a href="?page=1">&laquo; FIRST</a>
+						<a href="?page={{ alarms.previous_page_number }}">
+							| PREVIOUS
+						</a>
+					
+					{% else %}
+						
+						&laquo; FIRST | PREVIOUS
+					
+					{% endif %}
+
+					<span class="current">
+						Page {{ alarms.number }} of {{ alarms.paginator.num_pages }}.
+					</span>
+
+					{% if alarms.has_next %}
+						
+						<a href="?page={{ alarms.next_page_number }}">NEXT</a>
+						<a href="?page={{ alarms.paginator.num_pages }}">| LAST &raquo;</a>
+					
+					{% else %}
+						
+						NEXT | LAST &raquo;
+					
+					{% endif %}
+				</span>
+			</div>
+		</div>
+	</div>
+{% endblock %}
