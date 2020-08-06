@@ -2,7 +2,7 @@
 
 opt=$1
 
-source $HOME/.bashrc
+source $HOME/.bash_profile
 
 # User configurable variables:
 PYTHON="python"

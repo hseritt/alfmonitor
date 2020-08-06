@@ -6,7 +6,7 @@
 DB_TYPE="postgresql"
 DB_NAME="alfmonitor"
 
-source $HOME/.bashrc
+source $HOME/.bash_profile
 clear; reset;
 
 echo "Clearing all *.pyc files ..."
@@ -35,9 +35,9 @@ then
 elif [ "$DB_TYPE" == "postgresql" ]
 then
 	echo "Dropping database ..."
-	dropdb $DB_NAME
+	/Applications/Postgres.app/Contents/Versions/12/bin/dropdb $DB_NAME
 	echo "Creating database ..."
-	createdb $DB_NAME -O $DB_NAME
+	/Applications/Postgres.app/Contents/Versions/12/bin/createdb $DB_NAME -O admin 
 	echo "Done."
 elif [ "$DB_TYPE" == "mysql" ]
 then

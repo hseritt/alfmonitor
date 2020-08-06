@@ -95,8 +95,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'alfmonitor',
-        'USER': 'alfmonitor',
-        'PASSWORD': 'alfmonitor',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -155,11 +155,11 @@ AGENT_RUN_FREQUENCY = 60
 
 # Email Server
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ['TEST_EMAIL_SERVER_USERNAME']
-EMAIL_HOST_PASSWORD = os.environ['TEST_EMAIL_SERVER_PASSWORD']
-EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = os.environ['TEST_EMAIL_SERVER_USERNAME']
+# EMAIL_HOST_PASSWORD = os.environ['TEST_EMAIL_SERVER_PASSWORD']
+# EMAIL_PORT = 587
 
 MAIL_FAIL_SILENTLY = False
 MAILER_RUN_FREQUENCY = 60

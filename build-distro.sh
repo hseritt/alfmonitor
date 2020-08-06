@@ -25,8 +25,8 @@ echo "Creating scripts directory ..."
 mkdir $DISTRO_DEST_DIR/scripts
 
 echo "Distributing compiled modules ..."
-cp __pycache__/engine.cpython-36.pyc $DISTRO_DEST_DIR/scripts/engine.pyc
-cp __pycache__/monitor.cpython-36.pyc $DISTRO_DEST_DIR/scripts/monitor.pyc
+cp __pycache__/engine.cpython-38.pyc $DISTRO_DEST_DIR/scripts/engine.pyc
+cp __pycache__/monitor.cpython-38.pyc $DISTRO_DEST_DIR/scripts/monitor.pyc
 
 echo "Generating secret_key ..."
 python django_genkey.py
