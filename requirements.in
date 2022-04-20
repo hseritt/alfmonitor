@@ -1,7 +1,7 @@
 asgiref
 certifi
 chardet
-Django
+Django==3.2.13
 gunicorn
 idna
 packaging
