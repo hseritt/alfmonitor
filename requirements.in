@@ -1,0 +1,15 @@
+asgiref
+certifi
+chardet
+Django
+gunicorn
+idna
+packaging
+pip-review
+psycopg2-binary
+pyparsing
+pytz
+requests
+six
+sqlparse
+urllib3
